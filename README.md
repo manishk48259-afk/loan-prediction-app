@@ -60,5 +60,3 @@
 | Decision Tree | 72% | 0.80 | 0.71 |
 
 ---
-
-## 📁 Project Structure
