@@ -6,12 +6,17 @@
 ![Streamlit](https://img.shields.io/badge/Streamlit-1.28-red)
 ![License](https://img.shields.io/badge/License-MIT-green)
 ![Accuracy](https://img.shields.io/badge/Accuracy-85%25-brightgreen)
+![Status](https://img.shields.io/badge/Status-LIVE-success)
 
 ---
 
 ## 🚀 Live Demo
 
-👉 **[Try the App Live](https://your-app-name.streamlit.app)** *(Coming Soon)*
+### 👉 **[Try the App LIVE](http://bit.ly/4wOUlzw)** 🎯
+
+**Direct URL:** https://loan-prediction-app-l7uu6oepzfdejxdpyrv4xy.streamlit.app/
+
+📱 Works on Mobile & Desktop | 🌍 24/7 Available | ⚡ Real-time Predictions
 
 ---
 
