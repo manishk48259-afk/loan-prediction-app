@@ -17,31 +17,30 @@ st.set_page_config(
 )
 
 # ============================================================
-# EXACT INDIA ANALYTICS STYLE CSS + VISIBLE TOGGLE ARROW
+# CLEAN LIGHT PROFESSIONAL CSS
 # ============================================================
 st.markdown("""
 <style>
-    /* ===== CLEAN WHITE BACKGROUND ===== */
+    /* ===== CLEAN LIGHT BACKGROUND ===== */
     .stApp {
         background: #fafafa;
     }
     
     .block-container {
-        padding: 3rem 3rem 2rem 3rem; /* Thoda top padding badhaya taki arrow overlap na kare */
+        padding: 3rem 3rem 2rem 3rem;
         max-width: 1400px;
     }
     
-    /* ===== HIDE MENU & FOOTER, BUT KEEP HEADER FOR TOGGLE ARROW ===== */
+    /* ===== HIDE MENU & FOOTER, KEEP HEADER FOR TOGGLE ===== */
     #MainMenu {visibility: hidden;}
     footer {visibility: hidden;}
     
-    /* Header transparent karo taki arrow float karta hua dikhe */
     header[data-testid="stHeader"] {
         background: transparent !important;
         box-shadow: none !important;
     }
     
-    /* Toggle Arrow (>>) ko dark color do jaisa India Analytics me hai */
+    /* Toggle Arrow visible */
     [data-testid="collapsedControl"] {
         color: #111827 !important;
         background-color: transparent !important;
@@ -53,7 +52,7 @@ st.markdown("""
         height: 1.5rem !important;
     }
     
-    /* ===== SIDEBAR - EXACTLY LIKE INDIA ANALYTICS ===== */
+    /* ===== SIDEBAR - CLEAN WHITE ===== */
     section[data-testid="stSidebar"] {
         background: #ffffff;
         border-right: 1px solid #f0f0f0;
@@ -64,25 +63,25 @@ st.markdown("""
         color: #333333 !important;
     }
     
-    /* ===== SUBTITLE BAR (Pink/Peach) ===== */
+    /* ===== SUBTITLE BAR - SOFT BLUE ===== */
     .subtitle-bar {
-        background: #fef2f2;
+        background: #eff6ff;
         padding: 18px 0;
         text-align: center;
         border-radius: 8px;
         margin-bottom: 30px;
-        border: 1px solid #fecaca;
+        border: 1px solid #bfdbfe;
     }
     
     .subtitle-bar p {
-        color: #991b1b;
+        color: #1e40af;
         font-size: 1.1em;
         margin: 0;
         font-weight: 400;
         font-style: italic;
     }
     
-    /* ===== STAT CARDS - EXACT INDIA ANALYTICS STYLE ===== */
+    /* ===== STAT CARDS ===== */
     .stat-card {
         background: #ffffff;
         padding: 25px 25px 20px 25px;
@@ -145,7 +144,7 @@ st.markdown("""
         color: #991b1b;
     }
     
-    /* ===== TIMELINE CARDS (Colored Backgrounds) ===== */
+    /* ===== TIMELINE CARDS (Light Colored Backgrounds) ===== */
     .card-red {
         background: #fef2f2;
         padding: 25px;
@@ -262,9 +261,9 @@ st.markdown("""
         border: 1px solid #e5e7eb;
     }
     
-    /* ===== BUTTONS ===== */
+    /* ===== BUTTONS - LIGHT BLUE ===== */
     .stButton>button {
-        background: #4f46e5;
+        background: #60a5fa;
         color: white;
         border: none;
         padding: 12px 28px;
@@ -272,11 +271,13 @@ st.markdown("""
         font-weight: 600;
         font-size: 1em;
         width: 100%;
+        box-shadow: 0 2px 8px rgba(96, 165, 250, 0.2);
     }
     
     .stButton>button:hover {
-        background: #4338ca;
-        box-shadow: 0 4px 12px rgba(79, 70, 229, 0.3);
+        background: #3b82f6;
+        box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3);
+        transform: translateY(-1px);
     }
     
     /* ===== METRICS ===== */
@@ -330,7 +331,7 @@ st.markdown("""
     
     /* ===== DOWNLOAD BUTTON ===== */
     .stDownloadButton>button {
-        background: #059669 !important;
+        background: #10b981 !important;
         color: white !important;
         border: none !important;
         border-radius: 8px !important;
@@ -350,17 +351,16 @@ def load_model():
 model, scaler = load_model()
 
 # ============================================================
-# SIDEBAR - INDIA ANALYTICS STYLE
+# SIDEBAR - CLEAN NO BACKGROUND
 # ============================================================
 with st.sidebar:
-    # Sidebar Logo
+    # Clean Logo - Big Icon, No Background
     st.markdown("""
-    <div style="background: linear-gradient(135deg, #4f46e5, #7c3aed); 
-                padding: 35px 20px; border-radius: 12px; text-align: center;
-                margin-bottom: 15px;">
-        <div style="font-size: 3em;">🏦</div>
-        <div style="color: white !important; font-size: 0.9em; margin-top: 5px; font-weight: 500;">
-            Credit Assessment AI
+    <div style="text-align: center; padding: 30px 10px 20px 10px;">
+        <div style="font-size: 6em; line-height: 1;">🏦</div>
+        <div style="color: #6b7280 !important; font-size: 0.85em; 
+                    margin-top: 10px; font-weight: 600; letter-spacing: 1px;">
+            CREDIT ASSESSMENT AI
         </div>
     </div>
     """, unsafe_allow_html=True)
@@ -370,7 +370,7 @@ with st.sidebar:
     st.markdown("---")
     
     st.markdown("### 📊 Navigation")
-    page = st.radio("", [
+    page = st.radio("Select Page", [
         "🏠 Home",
         "🎯 Loan Predictor",
         "📊 Analytics",
@@ -385,6 +385,11 @@ with st.sidebar:
         st.session_state.approved_count = 0
         st.session_state.rejected_count = 0
         st.session_state.history = []
+    
+    st.markdown("### 📈 Live Stats")
+    st.metric("Total", st.session_state.total_predictions)
+    st.metric("Approved ✅", st.session_state.approved_count)
+    st.metric("Rejected ❌", st.session_state.rejected_count)
 
 # ============================================================
 # PAGE 1: HOME
@@ -397,7 +402,7 @@ if page == "🏠 Home":
     </div>
     """, unsafe_allow_html=True)
     
-    # Main KPI Cards (Exact India Analytics Style)
+    # Main KPI Cards
     col1, col2, col3, col4 = st.columns(4)
     
     with col1:
@@ -434,45 +439,6 @@ if page == "🏠 Home":
     
     st.markdown("---")
     
-    # Project Pipeline Timeline
-    st.markdown('<div class="sec-title">📊 Project Pipeline</div>', unsafe_allow_html=True)
-    
-    col1, col2, col3, col4 = st.columns(4)
-    
-    with col1:
-        st.markdown("""
-        <div class="card-red">
-            <div class="card-title">Step 1</div>
-            <div class="card-value">Data</div>
-            <div class="card-desc">Loading & Cleaning</div>
-        </div>""", unsafe_allow_html=True)
-    
-    with col2:
-        st.markdown("""
-        <div class="card-green">
-            <div class="card-title">Step 2</div>
-            <div class="card-value">EDA</div>
-            <div class="card-desc">Analysis & Features</div>
-        </div>""", unsafe_allow_html=True)
-    
-    with col3:
-        st.markdown("""
-        <div class="card-yellow">
-            <div class="card-title">Step 3</div>
-            <div class="card-value">Training</div>
-            <div class="card-desc">7 ML Algorithms</div>
-        </div>""", unsafe_allow_html=True)
-    
-    with col4:
-        st.markdown("""
-        <div class="card-blue">
-            <div class="card-title">Step 4</div>
-            <div class="card-value">Deploy</div>
-            <div class="card-desc">Streamlit Web App</div>
-        </div>""", unsafe_allow_html=True)
-    
-    st.markdown("---")
-    
     # Model Performance Overview
     st.markdown('<div class="sec-title">📊 Model Performance Overview</div>', unsafe_allow_html=True)
     
@@ -486,7 +452,8 @@ if page == "🏠 Home":
         })
         fig1 = px.bar(models_df, x='Accuracy', y='Model', orientation='h',
                        title='Model Accuracy (%)',
-                       color='Accuracy', color_continuous_scale=['#fecaca', '#fca5a5', '#f87171', '#ef4444', '#dc2626', '#b91c1c', '#991b1b'])
+                       color='Accuracy', 
+                       color_continuous_scale=['#bfdbfe', '#93c5fd', '#60a5fa', '#3b82f6', '#2563eb', '#1d4ed8', '#1e40af'])
         fig1.update_layout(paper_bgcolor='rgba(0,0,0,0)', plot_bgcolor='#ffffff',
                            font={'color': '#111827'}, height=380, showlegend=False,
                            coloraxis_showscale=False,
@@ -625,7 +592,6 @@ elif page == "🎯 Loan Predictor":
         
         st.markdown("---")
         
-        # Result
         if prediction == 1:
             st.session_state.approved_count += 1
             st.markdown(f"""
@@ -654,7 +620,6 @@ elif page == "🎯 Loan Predictor":
         
         st.markdown("<br>", unsafe_allow_html=True)
         
-        # Metrics
         col1, col2, col3, col4 = st.columns(4)
         with col1:
             st.markdown(f"""
@@ -681,7 +646,6 @@ elif page == "🎯 Loan Predictor":
                 <div class="card-value">{dti*100:.1f}%</div>
             </div>""", unsafe_allow_html=True)
         
-        # Risk Gauge
         st.markdown('<div class="sec-title">🎯 Risk Assessment</div>', unsafe_allow_html=True)
         
         risk_score = probability[0] * 100
@@ -733,7 +697,6 @@ elif page == "🎯 Loan Predictor":
                 </ul>
             </div>""", unsafe_allow_html=True)
         
-        # Loan Breakdown
         st.markdown('<div class="sec-title">💰 Loan Breakdown</div>', unsafe_allow_html=True)
         
         col1, col2, col3 = st.columns(3)
@@ -766,7 +729,7 @@ elif page == "🎯 Loan Predictor":
         st.plotly_chart(fig_pie, use_container_width=True)
     
     if st.session_state.history:
-        st.markdown('<div class="sec-title">📜 History</div>', unsafe_allow_html=True)
+        st.markdown('<div class="sec-title">📜 Recent Assessments</div>', unsafe_allow_html=True)
         st.dataframe(pd.DataFrame(st.session_state.history), 
                       use_container_width=True, hide_index=True)
         csv = pd.DataFrame(st.session_state.history).to_csv(index=False)
@@ -830,14 +793,14 @@ elif page == "📊 Analytics":
     col1, col2 = st.columns(2)
     with col1:
         fig = px.bar(pd.crosstab(df_viz['Gender'], df_viz['Loan_Status']),
-                      barmode='group', title='By Gender',
+                      barmode='group', title='Loan Status by Gender',
                       color_discrete_sequence=['#fca5a5', '#86efac'])
         fig.update_layout(paper_bgcolor='rgba(0,0,0,0)', plot_bgcolor='white',
                           font={'color': '#111827'})
         st.plotly_chart(fig, use_container_width=True)
     with col2:
         fig = px.bar(pd.crosstab(df_viz['Education'], df_viz['Loan_Status']),
-                      barmode='group', title='By Education',
+                      barmode='group', title='Loan Status by Education',
                       color_discrete_sequence=['#fca5a5', '#86efac'])
         fig.update_layout(paper_bgcolor='rgba(0,0,0,0)', plot_bgcolor='white',
                           font={'color': '#111827'})
@@ -846,7 +809,7 @@ elif page == "📊 Analytics":
     col3, col4 = st.columns(2)
     with col3:
         fig = px.bar(pd.crosstab(df_viz['Property_Area'], df_viz['Loan_Status']),
-                      barmode='group', title='By Property Area',
+                      barmode='group', title='Loan Status by Property Area',
                       color_discrete_sequence=['#fca5a5', '#86efac'])
         fig.update_layout(paper_bgcolor='rgba(0,0,0,0)', plot_bgcolor='white',
                           font={'color': '#111827'})
@@ -861,7 +824,7 @@ elif page == "📊 Analytics":
         st.plotly_chart(fig, use_container_width=True)
     
     fig = px.histogram(df_viz, x='ApplicantIncome', color='Loan_Status',
-                        title='Income Distribution', nbins=50,
+                        title='Income Distribution by Loan Status', nbins=50,
                         color_discrete_sequence=['#fca5a5', '#86efac'])
     fig.update_layout(paper_bgcolor='rgba(0,0,0,0)', plot_bgcolor='white',
                       font={'color': '#111827'})
@@ -888,19 +851,21 @@ elif page == "📈 Model Performance":
         'AUC': [0.80, 0.71, 0.84, 0.81, 0.74, 0.83, 0.82]
     })
     
-    st.markdown('<div class="sec-title">🏆 Performance Table</div>', unsafe_allow_html=True)
+    st.markdown('<div class="sec-title">🏆 Performance Metrics Table</div>', unsafe_allow_html=True)
     st.dataframe(model_data.style.highlight_max(
         axis=0, subset=['Accuracy','Precision','Recall','F1 Score','AUC'],
         color='#dcfce7'), use_container_width=True, hide_index=True)
     
     fig = px.bar(model_data.melt(id_vars='Model', var_name='Metric', value_name='Score'),
                   x='Model', y='Score', color='Metric', barmode='group',
+                  title='Model Performance Comparison',
                   color_discrete_sequence=['#93c5fd', '#86efac', '#fde68a', '#fca5a5', '#c4b5fd'])
     fig.update_layout(paper_bgcolor='rgba(0,0,0,0)', plot_bgcolor='white',
                       font={'color': '#111827'}, xaxis_tickangle=-30)
     st.plotly_chart(fig, use_container_width=True)
     
-    # Radar
+    st.markdown('<div class="sec-title">🕸️ Radar Chart Comparison</div>', unsafe_allow_html=True)
+    
     fig_r = go.Figure()
     cols = ['#93c5fd', '#fca5a5', '#86efac', '#fde68a', '#c4b5fd', '#fdba74', '#67e8f9']
     cats = ['Accuracy', 'Precision', 'Recall', 'F1 Score', 'AUC']
@@ -918,6 +883,8 @@ elif page == "📈 Model Performance":
     )
     st.plotly_chart(fig_r, use_container_width=True)
     
+    st.markdown('<div class="sec-title">🏆 Best Model Analysis</div>', unsafe_allow_html=True)
+    
     col1, col2 = st.columns(2)
     with col1:
         st.markdown("""
@@ -933,7 +900,7 @@ elif page == "📈 Model Performance":
             <ul style="color:#374151; line-height:2; padding-left:18px; margin:10px 0 0 0;">
                 <li>Highest F1 Score across all models</li>
                 <li>Ensemble method - reduces overfitting</li>
-                <li>Handles mixed data types</li>
+                <li>Handles mixed data types well</li>
                 <li>Built-in feature importance</li>
             </ul>
         </div>""", unsafe_allow_html=True)
@@ -951,44 +918,64 @@ elif page == "📋 Documentation":
     
     st.markdown("""
     ### 🎯 Project Overview
+    
     Enterprise ML solution for automated loan approval using 7 algorithms, 
-    SMOTE balancing, and GridSearchCV optimization.
+    SMOTE class balancing, and GridSearchCV hyperparameter optimization.
     
     ---
+    
+    ### 📊 Dataset Specifications
     
     | Attribute | Details |
     |-----------|---------|
-    | Source | Kaggle Loan Prediction Dataset |
-    | Records | 614 applications |
-    | Features | 17 (13 original + 5 engineered) |
-    | Target | Binary Classification |
-    | Best Model | Random Forest (F1: 0.90) |
+    | **Source** | Kaggle Loan Prediction Dataset |
+    | **Records** | 614 applications |
+    | **Features** | 17 (13 original + 5 engineered) |
+    | **Target** | Binary Classification |
+    | **Best Model** | Random Forest (F1: 0.90) |
     
     ---
     
-    ### 🔧 Pipeline
+    ### 🔧 Implementation Pipeline
     
-    1. Data Loading & Cleaning
-    2. Feature Engineering (EMI, DTI, Total Income)
-    3. SMOTE Class Balancing
-    4. 7 Models Training & Evaluation
-    5. GridSearchCV Hyperparameter Tuning
-    6. Streamlit Web Deployment
+    1. **Data Loading & Cleaning** - Missing value imputation
+    2. **Feature Engineering** - EMI, DTI, Total Income, Log transforms
+    3. **Class Balancing** - SMOTE oversampling technique
+    4. **Model Training** - 7 ML algorithms compared
+    5. **Cross-Validation** - 5-Fold validation
+    6. **Hyperparameter Tuning** - GridSearchCV optimization
+    7. **Deployment** - Streamlit web application
     
     ---
     
-    ### 🛠️ Tech Stack
+    ### 🤖 Models Evaluated
     
-    Python • Pandas • NumPy • Scikit-learn • XGBoost • Streamlit • Plotly • SMOTE
+    | # | Algorithm | Type | F1 Score |
+    |---|-----------|------|----------|
+    | 1 | Logistic Regression | Linear | 0.89 |
+    | 2 | Decision Tree | Tree-based | 0.80 |
+    | 3 | **Random Forest** ⭐ | Ensemble | **0.90** |
+    | 4 | SVM | Kernel-based | 0.89 |
+    | 5 | KNN | Instance-based | 0.83 |
+    | 6 | Gradient Boosting | Ensemble | 0.89 |
+    | 7 | XGBoost | Ensemble | 0.88 |
+    
+    ---
+    
+    ### 🛠️ Technology Stack
+    
+    Python 3.12 • Pandas • NumPy • Scikit-learn • XGBoost • 
+    Streamlit • Plotly • Imbalanced-learn (SMOTE)
     
     ---
     
     ### 💼 Business Impact
     
-    - 60% faster loan processing
-    - Consistent automated decisions
-    - Real-time risk assessment
-    - Data-driven credit analysis
+    - **60% faster** loan processing time
+    - **Consistent** automated decisions across branches
+    - **Real-time** risk assessment
+    - **Data-driven** credit analysis
+    - **Scalable** solution for enterprise deployment
     """)
 
 # ============================================================
